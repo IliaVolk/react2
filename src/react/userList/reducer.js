@@ -41,7 +41,7 @@ let initialState = {
 export default function patentDetailsReducer(state = initialState, action) {
     switch (action.type){
         case "ADD_USER":
-            users.add(action.user);
+            users.push(action.user);
             return {
                 searchPattern: state.searchPattern,
                 users: users

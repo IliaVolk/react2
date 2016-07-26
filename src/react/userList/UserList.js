@@ -10,7 +10,7 @@ import User from "../../other/User"
 import './userList.css'
 import ExudingTextUserComponent from "./exudingTextUserComponent/ExudingTextUserComponent"
 import SearchUserForm from "./searchUserForm/SearchUserForm"
-import * as actions from "./actions"
+import * as actions from "./actions/actions"
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
