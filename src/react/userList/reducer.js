@@ -11,10 +11,10 @@ let users = [
     new User("Алексей"),
     new User("Василий")];
 /**
+ * @param {Array<User>}array
  * @param {User}user
  */
-function removeUserFromArray(user){
-    let array = users
+function removeUserFromArray(array, user){
     for (let i = 0; i < array.length; i+=1){
         if (array[i].id === user.id){
             array.splice(i,1);
@@ -23,16 +23,7 @@ function removeUserFromArray(user){
     }
     return array;
 }
-/**
- * @param {string}pattern
- * @param {User}user
- */
-function filterUserSearch(pattern, user){
-    let text = pattern.toLowerCase();
-    if (text === "")return true;
-    let name = user.name.toLowerCase();
-    return name.indexOf(text) > -1
-}
+
 let initialState = {
     users: users,
     searchPattern: ""
@@ -41,22 +32,17 @@ let initialState = {
 export default function patentDetailsReducer(state = initialState, action) {
     switch (action.type){
         case "ADD_USER":
-            users.push(action.user);
-            return {
-                searchPattern: state.searchPattern,
-                users: users
-            };
+            return Object.assign({}, state,{
+                users: state.users.concat([action.user])
+            } );
         case "REMOVE_USER":
-            removeUserFromArray(action.user)
-            return {
-                searchPattern: state.searchPattern,
-                users: users
-            };
+            return Object.assign({}, state,{
+                users: removeUserFromArray(state.users, action.user)
+            } );
         case "SEARCH_USER":
-            return {
-                searchPattern: action.searchPattern,
-                users: users.filter(filterUserSearch.bind(null, action.searchPattern))
-            };
+            return Object.assign({}, state, {
+                searchPattern: action.searchPattern
+            });
         default:
             return state;
     }

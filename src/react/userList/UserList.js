@@ -17,17 +17,8 @@ import { connect } from 'react-redux';
 class UserList extends Component {
     constructor() {
         super();
-        /*this.state  = {
-            users: [
-                new User("Алексей"),
-                new User("Василий")
-            ],
-            searchPattern: ""
-        };*/
-        this.onAddUser = this.onAddUser.bind(this);
-        this.onRemoveUser = this.onRemoveUser.bind(this)
-        this.onUserSearch = this.onUserSearch.bind(this)
         this.userToUserComponent = this.userToUserComponent.bind(this);
+        this.filterUserSearch = this.filterUserSearch.bind(this)
     }
 
 
@@ -44,52 +35,36 @@ class UserList extends Component {
                 <ExudingTextUserComponent
                     exudingText={this.props.stateFromReducer.searchPattern}
                     key={user.id}
-                    onRemoveUser={this.onRemoveUser}
+                    onRemoveUser={this.props.removeUser}
                     user={user}/>
         )
     }
 
     render() {
         if (this.props.stateFromReducer)
-        var userComponents = this.props.stateFromReducer.users.map(this.userToUserComponent)
+        var userComponents = this.props.stateFromReducer.users
+            .filter(this.filterUserSearch)
+            .map(this.userToUserComponent);
         console.log("UserList.render()");
         return (
             <div className="user-list">
                 <h3 className="list-component row">User list:</h3>
-                <SearchUserForm onUserSearch={this.onUserSearch}/>
-                <AddUserComponent onAddUser={this.onAddUser}/>
+                <SearchUserForm onUserSearch={this.props.searchUser}/>
+                <AddUserComponent onAddUser={this.props.addUser}/>
                 {userComponents}
             </div>
         )
     }
-    /**
-     *
-     * @param{String}name
-     */
-    onAddUser(name) {
-        this.props.addUser(name)
-        /*this.setState({
-            users: this.state.users.concat([new User(name)])
-        })*/
-    }
 
-
-
-
-    onUserSearch(searchPattern){
-        this.props.searchUser(searchPattern)
-        /*this.setState({
-            searchPattern: text
-        })*/
-    }
     /**
      * @param {User}user
      */
-    onRemoveUser(user) {
-        this.props.removeUser(user)
-        /*this.removeUserFromArray(user);
-        this.forceUpdate()*/
-    }
+    filterUserSearch(user){
+    let text = this.props.stateFromReducer.searchPattern.toLowerCase();
+    if (text === "")return true;
+    let name = user.name.toLowerCase();
+    return name.indexOf(text) > -1
+}
 
 }
 

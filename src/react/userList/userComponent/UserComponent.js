@@ -42,5 +42,6 @@ export default class UserComponent extends Component{
             <button className="btn btn-danger pull-right" onClick={this.onRemoveUser}>Remove</button>
         </div>
     );
+
 }
 }
