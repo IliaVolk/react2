@@ -25,7 +25,7 @@ export default class UserComponent extends Component{
     onRemoveUser(){
         console.log("onRemoveUser");
         $(ReactDOM.findDOMNode(this)).slideUp(()=>{
-            this.props.onRemoveUser(this);
+            this.props.onRemoveUser(this.props.user);
         });
     }
     shouldComponentUpdate(){
