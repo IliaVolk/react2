@@ -5,11 +5,6 @@
 
 import User from "./../../other/User"
 
-
-
-let users = [
-    new User("Алексей"),
-    new User("Василий")];
 /**
  * @param {Array<User>}array
  * @param {User}user
@@ -25,7 +20,9 @@ function removeUserFromArray(array, user){
 }
 
 let initialState = {
-    users: users,
+    users: [
+        new User("Алексей"),
+        new User("Василий")],
     searchPattern: ""
 };
 
