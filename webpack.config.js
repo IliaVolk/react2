@@ -12,6 +12,7 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
+    //new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],

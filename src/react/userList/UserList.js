@@ -41,8 +41,7 @@ class UserList extends Component {
     }
 
     render() {
-        if (this.props.stateFromReducer)
-        var userComponents = this.props.stateFromReducer.users
+        let userComponents = this.props.stateFromReducer.users
             .filter(this.filterUserSearch)
             .map(this.userToUserComponent);
         console.log("UserList.render()");
