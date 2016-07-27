@@ -4,7 +4,7 @@ import SearchUserForm from "./../userList/searchUserForm/SearchUserForm"
 import ExudingTextUserComponent from "./../userList/exudingTextUserComponent/ExudingTextUserComponent"
 
 
-export default class UserListSearchWrapper extends React.Component {
+export class UserListSearchWrapper extends React.Component {
     constructor() {
         super()
         this.filterUserSearch = this.filterUserSearch.bind(this)
